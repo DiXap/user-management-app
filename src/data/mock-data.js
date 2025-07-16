@@ -37,3 +37,5 @@ const mockUsers = [
     email: "jessica.williams@example.com",
   },
 ];
+
+export default mockUsers;
