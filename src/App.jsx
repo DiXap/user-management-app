@@ -1,5 +1,14 @@
+import UserForm from "./components/UserForm";
+import UserList from "./components/UserList";
+import { UserProvider } from "./contexts/UserContext";
+
 function App() {
-  return <p className="text-2xl text-slate-700">Swith to dev branch</p>;
+  return (
+    <UserProvider>
+      <UserForm />
+      <UserList />
+    </UserProvider>
+  );
 }
 
 export default App;
