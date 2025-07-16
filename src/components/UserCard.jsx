@@ -1,7 +1,14 @@
 import { Eraser, Pencil } from "lucide-react";
 import { PropTypes } from "prop-types";
+import { useUserContext } from "../contexts/UserContext";
 
 const UserCard = ({ id, name, email }) => {
+  const { deleteUser } = useUserContext();
+  const handleDelete = () => {
+    deleteUser(id);
+    console.log(`User ${id} deleted`);
+  };
+
   return (
     <div className="my-3 p-5 rounded-lg max-w-[240px] shadow-xl">
       <div className="">
@@ -17,7 +24,7 @@ const UserCard = ({ id, name, email }) => {
       </div>
       <div className="flex justify-between gap-2 mt-7">
         <button className="w-full p-1.5 bg-red-600 rounded-md">
-          <Eraser size={20} className="w-full" />
+          <Eraser size={20} className="w-full" onClick={handleDelete} />
         </button>
         <button className="w-full p-1.5 bg-blue-500 rounded-md">
           <Pencil size={20} className="w-full" />

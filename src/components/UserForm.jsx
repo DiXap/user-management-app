@@ -1,8 +1,10 @@
 import { Save } from "lucide-react";
 import { useState } from "react";
+import { useUserContext } from "../contexts/UserContext";
 
 const UserForm = () => {
-  const [userFormData, setUserFormData] = useState({
+    const { addUser } = useUserContext();
+    const [userFormData, setUserFormData] = useState({
     name: "",
     email: "",
   });
@@ -18,6 +20,7 @@ const UserForm = () => {
       email: email.trim(),
     };
 
+    addUser(newUser);
     console.log("User saved:", newUser);
     setUserFormData({ name: "", email: "" });
   };

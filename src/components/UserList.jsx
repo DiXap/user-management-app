@@ -1,9 +1,8 @@
-import { useState } from "react";
-import mockUsers from "../data/mock-data.js";
+import { useUserContext } from "../contexts/UserContext.jsx";
 import UserCard from "./UserCard.jsx";
 
 const UserList = () => {
-  const [users, setUsers] = useState(mockUsers);
+  const { users } = useUserContext();
 
   return (
     <div className="flex flex-wrap justify-center gap-5">
