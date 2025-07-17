@@ -9,6 +9,10 @@ const UserCard = ({ id, name, email }) => {
     console.log(`User ${id} deleted`);
   };
 
+  const handleEdit = () => {
+    console.log(`Editing User ${id}`);
+  }
+
   return (
     <div className="my-3 p-5 rounded-lg max-w-[240px] shadow-xl">
       <div className="">
@@ -26,7 +30,7 @@ const UserCard = ({ id, name, email }) => {
         <button className="w-full p-1.5 bg-red-600 rounded-md">
           <Eraser size={20} className="w-full" onClick={handleDelete} />
         </button>
-        <button className="w-full p-1.5 bg-blue-500 rounded-md">
+        <button className="w-full p-1.5 bg-blue-500 rounded-md" onClick={handleEdit}>
           <Pencil size={20} className="w-full" />
         </button>
       </div>
