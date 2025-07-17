@@ -79,5 +79,6 @@ Colección de UserCard.
 - Añadir y eliminar UserCards se consideran **cambios** y se verán reflejados aquí.
 
 ### UserForm
-Formulario para añadir un Usuario.
+- Formulario para añadir un Usuario.
 - Es reutilizable para la edición del Usuario.
+- Es necesario un context para manejar las operaciones de Usuarios.
