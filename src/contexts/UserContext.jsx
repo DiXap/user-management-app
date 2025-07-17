@@ -12,6 +12,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState(mockUsers);
   const [userToUpdate, setUserToUpdate] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const addUser = useCallback((newUser) => {
     setUsers((prevUsers) => [...prevUsers, newUser]);
@@ -32,6 +33,17 @@ export const UserProvider = ({ children }) => {
     console.log("Dropping...");
   });
 
+  const openForm = useCallback(() => {
+    setIsFormOpen(true);
+    console.log("Opening form...");
+  });
+
+  const closeForm = useCallback(() => {
+    setIsFormOpen(false);
+    setUserToUpdate(null);
+    console.log("Closing form...");
+  });
+
   const value = useMemo(
     () => ({
       users,
@@ -41,6 +53,9 @@ export const UserProvider = ({ children }) => {
       userToUpdate,
       setUserToUpdate,
       dropUserToUpdate,
+      isFormOpen,
+      closeForm,
+      openForm,
     }),
     [
       users,
@@ -50,6 +65,9 @@ export const UserProvider = ({ children }) => {
       userToUpdate,
       setUserToUpdate,
       dropUserToUpdate,
+      isFormOpen,
+      closeForm,
+      openForm,
     ]
   );
 
