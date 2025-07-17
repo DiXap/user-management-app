@@ -3,13 +3,14 @@ import { PropTypes } from "prop-types";
 import { useUserContext } from "../contexts/UserContext";
 
 const UserCard = ({ id, name, email }) => {
-  const { deleteUser } = useUserContext();
+  const { deleteUser, setUserToUpdate } = useUserContext();
   const handleDelete = () => {
     deleteUser(id);
     console.log(`User ${id} deleted`);
   };
 
   const handleEdit = () => {
+    setUserToUpdate({ id, name, email });
     console.log(`Editing User ${id}`);
   }
 
