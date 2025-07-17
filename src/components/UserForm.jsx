@@ -107,15 +107,13 @@ const UserForm = () => {
           </div>
         </div>
         <div className="w-full mt-8 flex flex-wrap justify-between gap-1">
-          {userToUpdate && (
-            <button
-              type="button"
-              className="w-full sm:w-[45%] mx-auto p-2 bg-red-600 rounded-lg"
-              onClick={handleUpdateCancel}
-            >
-              <CircleSlash className="w-full" />
-            </button>
-          )}
+          <button
+            type="button"
+            className="w-full sm:w-[45%] mx-auto p-2 bg-red-600 rounded-lg"
+            onClick={handleUpdateCancel}
+          >
+            <CircleSlash className="w-full" />
+          </button>
           <button
             type="submit"
             className="w-full sm:w-[45%] mx-auto p-2 bg-emerald-500 rounded-lg"
