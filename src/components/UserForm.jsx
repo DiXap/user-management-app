@@ -3,8 +3,14 @@ import { useEffect, useState } from "react";
 import { useUserContext } from "../contexts/UserContext";
 
 const UserForm = () => {
-  const { addUser, updateUser, userToUpdate, dropUserToUpdate } =
-    useUserContext();
+  const {
+    addUser,
+    updateUser,
+    userToUpdate,
+    dropUserToUpdate,
+    isFormOpen,
+    closeForm,
+  } = useUserContext();
   const [userFormData, setUserFormData] = useState({
     name: "",
     email: "",
@@ -13,8 +19,8 @@ const UserForm = () => {
   useEffect(() => {
     if (userToUpdate) {
       setUserFormData({ name: userToUpdate.name, email: userToUpdate.email });
-    }
-  }, [userToUpdate]);
+    } // TODO: Eval if reseting form state to null (here) would be better to reduce repeated code
+  }, [userToUpdate, isFormOpen]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,12 +41,11 @@ const UserForm = () => {
       console.log(`User ${userToUpdate.id} updated`, userFormData);
     }
     setUserFormData({ name: "", email: "" });
+    closeForm();
   };
 
   const handleUpdateCancel = (event) => {
-    event.preventDefault();
-
-    dropUserToUpdate();
+    closeForm();
     setUserFormData({ name: "", email: "" });
   };
 
@@ -51,6 +56,8 @@ const UserForm = () => {
       [name]: value,
     }));
   };
+
+  if (!isFormOpen) return null;
 
   return (
     <div className="h-full min-w-full container bg-slate-800/50 flex items-center justify-center">
