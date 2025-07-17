@@ -1,11 +1,26 @@
-import { Save } from "lucide-react";
-import { useState } from "react";
+import { CircleSlash, Save } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../contexts/UserContext";
 
 const UserForm = () => {
+  const {
+    addUser,
+    updateUser,
+    userToUpdate,
+    dropUserToUpdate,
+    isFormOpen,
+    closeForm,
+  } = useUserContext();
   const [userFormData, setUserFormData] = useState({
     name: "",
     email: "",
   });
+
+  useEffect(() => {
+    if (userToUpdate) {
+      setUserFormData({ name: userToUpdate.name, email: userToUpdate.email });
+    } // TODO: Eval if reseting form state to null (here) would be better to reduce repeated code
+  }, [userToUpdate, isFormOpen]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,12 +28,24 @@ const UserForm = () => {
     const { name, email } = userFormData;
 
     const newUser = {
-      id: Date.now(),
       name: name.trim(),
       email: email.trim(),
     };
 
-    console.log("User saved:", newUser);
+    if (!userToUpdate) {
+      addUser({ id: Date.now(), ...newUser });
+      console.log("User saved:", newUser);
+    } else {
+      updateUser({ ...userToUpdate, ...newUser });
+      dropUserToUpdate();
+      console.log(`User ${userToUpdate.id} updated`, userFormData);
+    }
+    setUserFormData({ name: "", email: "" });
+    closeForm();
+  };
+
+  const handleUpdateCancel = (event) => {
+    closeForm();
     setUserFormData({ name: "", email: "" });
   };
 
@@ -29,6 +56,8 @@ const UserForm = () => {
       [name]: value,
     }));
   };
+
+  if (!isFormOpen) return null;
 
   return (
     <div className="h-full min-w-full container bg-slate-800/50 flex items-center justify-center">
@@ -77,12 +106,23 @@ const UserForm = () => {
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full sm:w-[50%] mt-8 mx-auto p-2 bg-emerald-500 rounded-lg"
-        >
-          <Save className="w-full" />
-        </button>
+        <div className="w-full mt-8 flex flex-wrap justify-between gap-1">
+          {userToUpdate && (
+            <button
+              type="button"
+              className="w-full sm:w-[45%] mx-auto p-2 bg-red-600 rounded-lg"
+              onClick={handleUpdateCancel}
+            >
+              <CircleSlash className="w-full" />
+            </button>
+          )}
+          <button
+            type="submit"
+            className="w-full sm:w-[45%] mx-auto p-2 bg-emerald-500 rounded-lg"
+          >
+            <Save className="w-full" />
+          </button>
+        </div>
       </form>
     </div>
   );
