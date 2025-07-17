@@ -1,13 +1,20 @@
-import { Save } from "lucide-react";
-import { useState } from "react";
+import { CircleSlash, Save } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "../contexts/UserContext";
 
 const UserForm = () => {
-    const { addUser } = useUserContext();
-    const [userFormData, setUserFormData] = useState({
+  const { addUser, updateUser, userToUpdate, dropUserToUpdate } =
+    useUserContext();
+  const [userFormData, setUserFormData] = useState({
     name: "",
     email: "",
   });
+
+  useEffect(() => {
+    if (userToUpdate) {
+      setUserFormData({ name: userToUpdate.name, email: userToUpdate.email });
+    }
+  }, [userToUpdate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,13 +22,25 @@ const UserForm = () => {
     const { name, email } = userFormData;
 
     const newUser = {
-      id: Date.now(),
       name: name.trim(),
       email: email.trim(),
     };
 
-    addUser(newUser);
-    console.log("User saved:", newUser);
+    if (!userToUpdate) {
+      addUser({ id: Date.now(), ...newUser });
+      console.log("User saved:", newUser);
+    } else {
+      updateUser({ ...userToUpdate, ...newUser });
+      dropUserToUpdate();
+      console.log(`User ${userToUpdate.id} updated`, userFormData);
+    }
+    setUserFormData({ name: "", email: "" });
+  };
+
+  const handleUpdateCancel = (event) => {
+    event.preventDefault();
+
+    dropUserToUpdate();
     setUserFormData({ name: "", email: "" });
   };
 
@@ -80,12 +99,23 @@ const UserForm = () => {
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full sm:w-[50%] mt-8 mx-auto p-2 bg-emerald-500 rounded-lg"
-        >
-          <Save className="w-full" />
-        </button>
+        <div className="w-full mt-8 flex flex-wrap justify-between gap-1">
+          {userToUpdate && (
+            <button
+              type="button"
+              className="w-full sm:w-[45%] mx-auto p-2 bg-red-600 rounded-lg"
+              onClick={handleUpdateCancel}
+            >
+              <CircleSlash className="w-full" />
+            </button>
+          )}
+          <button
+            type="submit"
+            className="w-full sm:w-[45%] mx-auto p-2 bg-emerald-500 rounded-lg"
+          >
+            <Save className="w-full" />
+          </button>
+        </div>
       </form>
     </div>
   );
