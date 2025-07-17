@@ -20,7 +20,16 @@ export const UserProvider = ({ children }) => {
     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
   });
 
-  const value = useMemo(() => ({ users, addUser, deleteUser }), [users, addUser, deleteUser]);
+  const updateUser = useCallback((updatedUser) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+    );
+  });
+
+  const value = useMemo(
+    () => ({ users, addUser, deleteUser, updateUser }),
+    [users, addUser, deleteUser, updateUser]
+  );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
