@@ -11,6 +11,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [users, setUsers] = useState(mockUsers);
+  const [userToUpdate, setUserToUpdate] = useState(null);
 
   const addUser = useCallback((newUser) => {
     setUsers((prevUsers) => [...prevUsers, newUser]);
@@ -26,9 +27,30 @@ export const UserProvider = ({ children }) => {
     );
   });
 
+  const dropUserToUpdate = useCallback(() => {
+    setUserToUpdate(null);
+    console.log("Dropping...");
+  });
+
   const value = useMemo(
-    () => ({ users, addUser, deleteUser, updateUser }),
-    [users, addUser, deleteUser, updateUser]
+    () => ({
+      users,
+      addUser,
+      deleteUser,
+      updateUser,
+      userToUpdate,
+      setUserToUpdate,
+      dropUserToUpdate,
+    }),
+    [
+      users,
+      addUser,
+      deleteUser,
+      updateUser,
+      userToUpdate,
+      setUserToUpdate,
+      dropUserToUpdate,
+    ]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
