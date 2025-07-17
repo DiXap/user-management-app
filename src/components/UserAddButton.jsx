@@ -2,7 +2,7 @@ import { UserRoundPlus } from "lucide-react";
 import { useUserContext } from "../contexts/UserContext";
 import clsx from "clsx";
 
-const AddUserButton = ({ iconSize, iconColor, className }) => {
+const UserAddButton = ({ iconSize, iconColor, className }) => {
   const { openForm } = useUserContext();
 
   return (
@@ -12,4 +12,4 @@ const AddUserButton = ({ iconSize, iconColor, className }) => {
   );
 };
 
-export default AddUserButton;
+export default UserAddButton;
