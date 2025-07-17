@@ -1,12 +1,12 @@
 import UserForm from "./components/UserForm";
 import UserList from "./components/UserList";
-import UserAddButton from "./components/UserAddButton";
 import { UserProvider } from "./contexts/UserContext";
+import Toolbar from "./components/Toolbar";
 
 function App() {
   return (
     <UserProvider>
-      <UserAddButton className="w-full" />
+      <Toolbar />
       <UserForm />
       <UserList />
     </UserProvider>
