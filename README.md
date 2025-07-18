@@ -1,12 +1,72 @@
-# React + Vite
+# User Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The main focus of this project was to practice React development. And it consists of a minimal
+CRUD to manage Users.
 
-Currently, two official plugins are available:
+## Project structure
+Project follows typical directories/files organization for a React application. Such as:
+```zsh
+.
+├── README.md
+├── eslint.config.js
+├── index.html
+├── notes.md
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── src
+│   ├── App.jsx
+│   ├── components
+│   │   ├── Navbar.jsx
+│   │   ├── Toolbar.jsx
+│   │   ├── UserAddButton.jsx
+│   │   ├── UserCard.jsx
+│   │   ├── UserForm.jsx
+│   │   └── UserList.jsx
+│   ├── contexts
+│   │   └── UserContext.jsx
+│   ├── data
+│   │   └── mock-data.js
+│   ├── index.css
+│   └── main.jsx
+└── vite.config.js
+```
+> [!NOTE]  
+> Some notes that were taken during development process can be found 
+> inside the `notes.md` file.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project requirements - setting up your environment
+Since it's a simple React app we just need to make sure to have `node` and `npm` on its long-term 
+support (LTS) version (preferably). Specifically, project run on:
+  - `node` 22.13.1
+  - `npm` 10.9.2
+  > So make sure to have those or posterior versions
 
-## Expanding the ESLint configuration
+You can check you current installation by executing the following:
+```zsh
+node --version
+npm --version
+```
+If either of them throws an error or doesn't output anything at all, then you can get the installer 
+for node's LTS version [here](https://nodejs.org/es).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> [!TIP]  
+> Both `npm` and `node` will be installed alongside each other, though I encourage 
+> you to explore other alternatives such as [bun](https://bun.sh)
+
+## Launching project
+Once you made sure to have your environment ready, then you need to open a terminal inside the 
+root directory to:
+  1. Install dependencies:
+```zsh
+npm install
+```
+  2. Run project:
+```zsh
+npm run dev
+```
+Then, open your preferred browser on the URL that the prompt shows to use the app.
+
+## Acknowledgments
+Special thanks to all my instructors, none of this would be possible without their hard work.
