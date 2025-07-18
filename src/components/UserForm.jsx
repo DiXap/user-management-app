@@ -22,6 +22,19 @@ const UserForm = () => {
     } // TODO: Eval if reseting form state to null (here) would be better to reduce repeated code
   }, [userToUpdate, isFormOpen]);
 
+  useEffect(() => {
+    const handleEscKeyPress = (event) => {
+      if (event.key === "Escape") closeForm();
+    };
+    window.addEventListener("keydown", handleEscKeyPress);
+
+    return () => window.removeEventListener("keydown", handleEscKeyPress);
+  }, [closeForm]);
+
+  const handleOutClick = (event) => {
+    if (event.target === event.currentTarget) closeForm();
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -60,7 +73,15 @@ const UserForm = () => {
   if (!isFormOpen) return null;
 
   return (
-    <div className="h-full min-w-full container bg-slate-800/50 flex items-center justify-center">
+    <div
+      className="h-full min-w-full container bg-slate-800/50 flex items-center justify-center fixed inset-0 z-50"
+      role="button"
+      onClick={handleOutClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") handleOutClick(e);
+      }}
+      tabIndex={0}
+    >
       <form
         onSubmit={handleSubmit}
         className="bg-white w-[90%] sm:w-[45%] rounded-lg p-6 shadow-2xl flex flex-col flex-wrap"
@@ -87,6 +108,7 @@ const UserForm = () => {
               placeholder="John Doe"
               required
               autoComplete="name"
+              autoFocus
             />
           </div>
           <div className="w-full flex flex-col p-2">
