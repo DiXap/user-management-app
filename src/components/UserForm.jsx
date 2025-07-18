@@ -108,6 +108,7 @@ const UserForm = () => {
               placeholder="John Doe"
               required
               autoComplete="name"
+              autoFocus
             />
           </div>
           <div className="w-full flex flex-col p-2">
