@@ -1,3 +1,6 @@
+/**
+ * Renders a sticky application Navbar
+ */
 const Navbar = () => {
   return (
     <nav className="w-full h-[75px] sticky top-0 z-20 bg-gray-800 p-4 flex items-center">
