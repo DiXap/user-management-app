@@ -2,6 +2,12 @@ import { CircleSlash, Save } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useUserContext } from "../contexts/UserContext";
 
+/**
+ * Renders a form inside a modal to create or edit a user.
+ * Automatically focuses the first input when opened and resets on cancel.
+ * 
+ * @returns {JSX.Element} The modal form for creating/editing users.
+ */
 const UserForm = () => {
   const {
     addUser,
